@@ -9,6 +9,5 @@ return {
   lazy = false,
   config = function()
     vim.keymap.set("n", "<leader>e", ":Neotree filesystem reveal toggle left<CR>", {})
-    vim.keymap.set("n", "<leader>bf", ":Neotree buffers reveal float<CR>", {})
   end,
 }
