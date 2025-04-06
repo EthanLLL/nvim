@@ -17,8 +17,9 @@ return {
     "neovim/nvim-lspconfig",
     config = function()
       local lspconfig = require("lspconfig")
-      lspconfig.lua_ls.setup({})
-      lspconfig.ts_ls.setup({})
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
+      lspconfig.lua_ls.setup({capabilities = capabilities})
+      lspconfig.ts_ls.setup({capabilities = capabilities})
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
