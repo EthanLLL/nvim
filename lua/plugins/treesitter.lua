@@ -4,7 +4,7 @@ return {
     -- treesitter setup
     local config = require("nvim-treesitter.configs")
     config.setup({
-      ensure_installed = { "c", "lua", "vim", "python", "javascript", "html", "css"},
+      ensure_installed = { "elixir", "heex", "eex", "c", "lua", "vim", "python", "javascript", "html", "css"},
       highlight = { enable = true },
       indent = { enable = true},
     })
