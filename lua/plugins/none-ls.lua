@@ -7,7 +7,9 @@ return {
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.prettier,
         null_ls.builtins.formatting.black,
-        null_ls.builtins.formatting.mix_format,
+        -- Elixir formatting is handled by the elixirls LSP (mix format), not
+        -- none-ls. The mix_format builtin was removed from none-ls core (moved
+        -- to none-ls-extras.nvim), so registering it here fails to load.
       },
     })
 
