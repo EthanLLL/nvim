@@ -19,14 +19,23 @@ vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>qq", "<cmd>q<CR>", { noremap = true, silent = true })
+-- 只有当前 buffer 真的挂着支持格式化的 LSP client 时才格式化，否则
+-- vim.lsp.buf.format() 会报 "no matching language servers"。
+local function fmt_then(cmd)
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+    if client:supports_method("textDocument/formatting") then
+      vim.lsp.buf.format()
+      break
+    end
+  end
+  vim.cmd(cmd)
+end
+
 -- leader ww, format and save
 vim.keymap.set("n", "<leader>ww", function()
-  vim.lsp.buf.format()
-  vim.cmd("w")
+  fmt_then("w")
 end, { noremap = true, silent = true })
 -- leader wq, format save and quit
 vim.keymap.set("n", "<leader>wq", function()
-  vim.lsp.buf.format()
-  vim.cmd("w")
-  vim.cmd("q")
+  fmt_then("wq")
 end, { noremap = true, silent = true })
