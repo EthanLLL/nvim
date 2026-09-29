@@ -14,10 +14,9 @@ return {
 
     add(null_ls.builtins.formatting.stylua, "stylua")
     add(null_ls.builtins.formatting.prettier, "prettier")
-    add(null_ls.builtins.formatting.black, "black")
 
     -- Go / Rust / Elixir 的格式化由各自的 LSP 完成（gofmt / rustfmt / mix
-    -- format），不需要在这里注册。
+    -- format），不需要在这里注册。Python 故意不格式化（pyright 本身也不提供）。
 
     null_ls.setup({ sources = sources })
 
