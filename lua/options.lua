@@ -7,6 +7,15 @@ vim.cmd("set shiftwidth=2")
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.ignorecase = true
+-- WSL: 用 win32yank 直接读写 Windows 剪贴板（默认检测到的 xclip 要经过 WSLg 同步，不稳定）
+if vim.fn.has("wsl") == 1 then
+  vim.g.clipboard = {
+    name = "win32yank-wsl",
+    copy = { ["+"] = "win32yank.exe -i --crlf", ["*"] = "win32yank.exe -i --crlf" },
+    paste = { ["+"] = "win32yank.exe -o --lf", ["*"] = "win32yank.exe -o --lf" },
+    cache_enabled = 0,
+  }
+end
 vim.api.nvim_set_option("clipboard", "unnamed")
 -- Remap
 vim.g.mapleader = " "
